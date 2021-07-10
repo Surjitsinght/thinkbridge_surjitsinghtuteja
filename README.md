@@ -1,7 +1,7 @@
 # thinkbridge_surjitsinghtuteja
 Web API Assignment source code
 
-Crud operation using .Net 5.0 core Web API with swagger to easily Test.
+Crud operation using .Net 5.0 core Web API with swagger to Test it easily.
 
 Kindly follow the steps to make it up and running:
 1) Create one Database in SQL Server
