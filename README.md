@@ -22,16 +22,16 @@ Parameters detail
 -----------------------------------------------------------
 
 /api/Items - POST
-Image can be uploaded (optional) now, right now I am storing image in web api local resource folder.
+- Image can be uploaded (optional) now, right now I am storing image in web api local resource folder.
 -----------------------------------------------------------
 
 /api/Items - PUT
-Image can be uploaded (optional) now, if any upload is there, old one will be deleted from web api local resource folder.
+- Image can be uploaded (optional) now, if any upload is there, old one will be deleted from web api local resource folder.
 -----------------------------------------------------------
 
 /api/Items/{id} - GET
-get item details by id
+- get item details by id
 -----------------------------------------------------------
 /api/Items/{id} - DELETE
-delete item with uploaded picture if any
+- delete item with uploaded picture if any
 
