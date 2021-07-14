@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace ShopBridgeItemTrackerAPI.Service.CQRS.Items.Queries
 {
-    public class GetItemsQuery : IRequest<List<ItemDto>> { }
+    public class GetItemsQuery : IRequest<List<ItemDto>> {
+        public GetItemsParamDto ParamDto { get; set; }
+    }
     public class GetItemsQueryHandler : IRequestHandler<GetItemsQuery, List<ItemDto>>
     {
         private readonly IItemRepository _itemRepository;
@@ -21,7 +23,8 @@ namespace ShopBridgeItemTrackerAPI.Service.CQRS.Items.Queries
         }
         public async Task<List<ItemDto>> Handle(GetItemsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _itemRepository.GetItemsAsync();
+            var req = request.ParamDto;
+            var result = await _itemRepository.GetItemsAsync(req.Keyword, req.PageNo, req.PageSize, req.SortField, req.SortExp);
             return _mapper.Map<List<ItemDto>>(result);
         }
     }

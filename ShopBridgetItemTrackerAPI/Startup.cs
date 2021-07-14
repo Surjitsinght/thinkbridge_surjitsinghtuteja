@@ -27,7 +27,7 @@ namespace ShopBridgeItemTrackerAPI
             services.AddMediatR(typeof(Startup));
             services.AddTransient<IItemRepository, ItemRepository>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {
@@ -43,9 +43,7 @@ namespace ShopBridgeItemTrackerAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShopBridgeItemTrackerAPI v1"));
-            }
-
-            app.UseHttpsRedirection();
+            }           
 
             app.UseRouting();
 

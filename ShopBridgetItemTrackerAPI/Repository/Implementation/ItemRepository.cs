@@ -57,26 +57,36 @@ namespace ShopBridgeItemTrackerAPI.Repository.Implementation
             
         }
 
-        public async Task<Item> GetItemAsync(int id)
+        public async Task<Items> GetItemAsync(int id)
         {
             using IDbConnection conn = Connection;
             if (conn.State == ConnectionState.Closed)
                 conn.Open();
 
-            var item = await conn.QueryAsync<Item>("SELECT Id, Name, Price, Description FROM dbo.ItemMaster WHERE Id = @Id", new { Id = id });
+            var item = await conn.QueryAsync<Items>("SELECT Id, ImgURL, [Name], Price, [Description], CreatedDate FROM dbo.ItemMaster WHERE Id = @Id", new { Id = id });
 
             return item.FirstOrDefault();
         }
 
-        public async Task<List<Item>> GetItemsAsync()
+        public async Task<List<Items>> GetItemsAsync(string keyword, int? pageNo, int? pageSize, string sortField, string sortExp)
         {
             using IDbConnection conn = Connection;
             if (conn.State == ConnectionState.Closed)
                 conn.Open();
 
-            var clients = await conn.QueryAsync<Item>("SELECT Id, Name, Price, Description FROM dbo.ItemMaster").ConfigureAwait(false);
+            var items = await conn.QueryAsync<Items>(
+                "[dbo].[usp_GetItems]",
+                new
+                {
+                    Keyword = keyword,
+                    PageNo = pageNo,
+                    PageSize = pageSize,
+                    SortField = sortField,
+                    SortExp = sortExp
+                },
+                commandType: CommandType.StoredProcedure);
 
-            return clients.ToList();
+            return items.ToList();
         }
     }
 }

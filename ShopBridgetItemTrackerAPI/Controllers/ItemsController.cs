@@ -20,11 +20,11 @@ namespace ShopBridgeItemTrackerAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetItems()
+        public async Task<ActionResult> GetItems([FromQuery] GetItemsParamDto getItems)
         {
             try
             {
-                var result = await _mediator.Send(new GetItemsQuery());
+                var result = await _mediator.Send(new GetItemsQuery { ParamDto = getItems });
                 return Ok(result);
             }
             catch (Exception)
@@ -57,7 +57,7 @@ namespace ShopBridgeItemTrackerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateItem(AddEditItemDto item)
+        public async Task<ActionResult> CreateItem([FromForm] AddEditItemDto item)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace ShopBridgeItemTrackerAPI.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> UpdateItem(int id, AddEditItemDto item)
+        public async Task<ActionResult> UpdateItem(int id, [FromForm] AddEditItemDto item)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace ShopBridgeItemTrackerAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                           "Error while updating item record");
             }
-            
+
         }
 
         [HttpDelete("{id:int}")]
@@ -111,7 +111,7 @@ namespace ShopBridgeItemTrackerAPI.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                          "Error while deleting item record");
-            }            
+            }
         }
     }
 }
