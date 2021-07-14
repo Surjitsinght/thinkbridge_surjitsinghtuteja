@@ -14,11 +14,11 @@ without parameters it will return all items considering default values
 -----------------
 Parameters detail
 -----------------
-Keyword (optional)
-PageNo (optional) default = 1
-PageSize (optional) default = 10
-SortField (optional) default = 'Name' (Name/Price)
-SortExp (optional)  default = 'asc' (asc/desc)
+1) Keyword (optional)
+2) PageNo (optional) default = 1
+3) PageSize (optional) default = 10
+4) SortField (optional) default = 'Name' (Name/Price)
+5) SortExp (optional)  default = 'asc' (asc/desc)
 -----------------------------------------------------------
 
 /api/Items - POST
